@@ -29,6 +29,7 @@ body {
   width: 100%;
   height: 100%;
   filter: blur(0.1vmin);
+  background: linear-gradient(to bottom, #1a0033, #330033, #660033);
 }
 
 .flowers {
@@ -132,7 +133,7 @@ body {
 
 .flower__leafs {
   position: relative;
-  animation: blooming-flower 2s backwards;
+  animation: rose-bloom 2.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) backwards;
 }
 
 .flower__leafs--1 {
@@ -155,174 +156,128 @@ body {
   transform: translate(-50%, -100%);
   width: 8vmin;
   height: 8vmin;
-  background-color: #6bf0ff;
+  background-color: #ff3366;
   filter: blur(10vmin);
 }
 
+/* ROSE PETALS - Responsive */
 .flower__leaf {
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: 8vmin;
-  height: 11vmin;
-  border-radius: 51% 49% 47% 53% / 44% 45% 55% 69%;
-  background-color: #a7ffee;
-  background-image: linear-gradient(to top, #54b8aa, #a7ffee);
+  width: 9vmin;
+  height: 12vmin;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background-color: #ff3366;
+  background-image: linear-gradient(to top, #cc0044, #ff6699);
   transform-origin: bottom center;
-  opacity: 0.9;
-  box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.5);
+  opacity: 0.95;
+  box-shadow: 
+    inset 0 2vmin 1vmin rgba(255, 255, 255, 0.4),
+    0 0.5vmin 1vmin rgba(0, 0, 0, 0.2);
+  border: 0.5vmin solid rgba(255, 255, 255, 0.1);
+  z-index: 4;
 }
 
 .flower__leaf--1 {
-  transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg);
+  transform: translate(-45%, -5%) rotate(-10deg) rotateY(20deg) rotateX(-10deg);
+  z-index: 4;
 }
 
 .flower__leaf--2 {
-  transform: translate(-50%, -4%) rotateX(40deg);
+  transform: translate(-55%, 5%) rotate(15deg) rotateY(-10deg) rotateX(10deg);
+  z-index: 3;
+  width: 10vmin;
+  height: 13vmin;
+  background-image: linear-gradient(to top, #b3003a, #ff3366);
 }
 
 .flower__leaf--3 {
-  transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg);
+  transform: translate(-45%, 10%) rotate(5deg) rotateY(30deg) rotateX(5deg);
+  z-index: 2;
+  width: 11vmin;
+  height: 14vmin;
+  background-image: linear-gradient(to top, #990033, #ff0044);
 }
 
 .flower__leaf--4 {
-  width: 8vmin;
+  width: 6vmin;
   height: 8vmin;
-  transform-origin: bottom left;
-  border-radius: 4vmin 10vmin 4vmin 4vmin;
-  transform: translate(-0%, 18%) rotateX(70deg) rotate(-43deg);
-  background-image: linear-gradient(to top, #39c6d6, #a7ffee);
-  z-index: 1;
-  opacity: 0.8;
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  transform-origin: center;
+  transform: translate(-50%, 20%) rotateX(60deg) rotate(45deg);
+  background-image: linear-gradient(to top, #80002b, #ff1a53);
+  z-index: 5;
+  opacity: 0.9;
+  box-shadow: 
+    inset 0 1vmin 1vmin rgba(255, 255, 255, 0.5),
+    0 0.3vmin 0.5vmin rgba(0, 0, 0, 0.3);
 }
 
+/* Additional outer rose petals */
+.flower__leafs::before {
+  content: "";
+  position: absolute;
+  width: 12vmin;
+  height: 15vmin;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background-image: linear-gradient(to top, #990033, #ff3366);
+  transform: translate(-50%, 8%) rotate(10deg) rotateY(15deg);
+  opacity: 0.9;
+  z-index: 1;
+  box-shadow: 
+    inset 0 2vmin 1vmin rgba(255, 255, 255, 0.3),
+    0 0.5vmin 1vmin rgba(0, 0, 0, 0.2);
+  border: 0.5vmin solid rgba(255, 255, 255, 0.1);
+  animation: blooming-flower 2s backwards;
+}
+
+/* ROSE CENTER (STAMEN) */
 .flower__white-circle {
   position: absolute;
-  left: -3.5vmin;
-  top: -3vmin;
-  width: 9vmin;
-  height: 4vmin;
+  left: -2vmin;
+  top: -1vmin;
+  width: 6vmin;
+  height: 6vmin;
   border-radius: 50%;
-  background-color: #fff;
+  background: radial-gradient(circle, #ffff66, #ffcc00, #ff9900);
+  z-index: 10;
+  box-shadow: 
+    0 0 2vmin #ffcc00,
+    inset 0 0 1vmin rgba(255, 255, 255, 0.5);
+  animation: stamen-pulse 3s infinite alternate;
 }
 
 .flower__white-circle::after {
   content: "";
   position: absolute;
   left: 50%;
-  top: 45%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 60%;
+  width: 80%;
+  height: 80%;
   border-radius: inherit;
-  background-image: repeating-linear-gradient(
-      300deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      67.5deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      112.5deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      112.5deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      22.5deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      22.5deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      157.5deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      67.5deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    repeating-linear-gradient(
-      67.5deg,
-      rgba(0, 0, 0, 0.03) 0px,
-      rgba(0, 0, 0, 0.03) 1px,
-      transparent 1px,
-      transparent 12px
-    ),
-    linear-gradient(90deg, rgb(255, 235, 18), rgb(255, 206, 0));
+  background: radial-gradient(circle, #ffcc00, #ff9900);
+  filter: blur(0.5vmin);
 }
 
+@keyframes stamen-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 2vmin #ffcc00,
+      inset 0 0 1vmin rgba(255, 255, 255, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 3vmin #ffcc00,
+      0 0 4vmin #ff9900,
+      inset 0 0 1vmin rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+  }
+}
+
+/* ROSE STEM */
 .flower__line {
   height: 55vmin;
   width: 1.5vmin;
@@ -332,11 +287,41 @@ body {
       transparent,
       rgba(255, 255, 255, 0.2)
     ),
-    linear-gradient(to top, transparent 10%, #14757a, #39c6d6);
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+    linear-gradient(to top, transparent 10%, #006633, #009966);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
   animation: grow-flower-tree 4s backwards;
 }
 
+/* ROSE THORNS */
+.flower__line::before {
+  content: "";
+  position: absolute;
+  width: 2vmin;
+  height: 3vmin;
+  background-color: #663300;
+  transform: rotate(45deg);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  left: 50%;
+  transform-origin: center;
+  animation: grow-flower-tree 4s backwards;
+}
+
+.flower--1 .flower__line::before {
+  top: 30%;
+  animation-delay: 1.5s;
+}
+
+.flower--2 .flower__line::before {
+  top: 40%;
+  animation-delay: 2s;
+}
+
+.flower--3 .flower__line::before {
+  top: 35%;
+  animation-delay: 2.5s;
+}
+
+/* ROSE LEAVES */
 .flower__line__leaf {
   --w: 7vmin;
   --h: calc(var(--w) + 2vmin);
@@ -345,13 +330,14 @@ body {
   left: 90%;
   width: var(--w);
   height: var(--h);
-  border-top-right-radius: var(--h);
-  border-bottom-left-radius: var(--h);
+  border-top-right-radius: 40% 60%;
+  border-bottom-left-radius: 40% 60%;
   background-image: linear-gradient(
     to top,
-    rgba(20, 117, 122, 0.4),
-    #39c6d6
+    rgba(0, 100, 50, 0.6),
+    #00cc66
   );
+  box-shadow: 0 0.5vmin 1vmin rgba(0, 0, 0, 0.2);
 }
 
 .flower__line__leaf--1 {
@@ -368,8 +354,8 @@ body {
 .flower__line__leaf--6 {
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
-  border-top-left-radius: var(--h);
-  border-bottom-right-radius: var(--h);
+  border-top-left-radius: 40% 60%;
+  border-bottom-right-radius: 40% 60%;
   left: -460%;
   top: 12%;
   transform: rotate(-70deg) rotateY(30deg);
@@ -377,6 +363,11 @@ body {
 
 .flower__line__leaf--4 {
   top: 40%;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 150, 100, 0.6),
+    #00ff99
+  );
 }
 
 .flower__line__leaf--5 {
@@ -392,19 +383,22 @@ body {
   transform: rotate(-70deg) rotateY(30deg) scale(0.6);
 }
 
+/* ROSE LIGHTS (SOFTER GLOW) */
 .flower__light {
   position: absolute;
   bottom: 0vmin;
   width: 1vmin;
   height: 1vmin;
-  background-color: rgb(255, 251, 0);
+  background-color: #ff99cc;
   border-radius: 50%;
-  filter: blur(0.2vmin);
+  filter: blur(0.5vmin);
   animation: light-ans 4s linear infinite backwards;
+  box-shadow: 0 0 1vmin #ff6699;
 }
 
 .flower__light:nth-child(odd) {
-  background-color: #23f0ff;
+  background-color: #ffccff;
+  box-shadow: 0 0 1vmin #ff99cc;
 }
 
 .flower__light--1 {
@@ -447,6 +441,7 @@ body {
   animation-delay: 3.5s;
 }
 
+/* GRASS & BACKGROUND ELEMENTS - Responsive */
 .flower__grass {
   --c: #159faa;
   --line-w: 1.5vmin;
@@ -1029,6 +1024,7 @@ body {
   animation: leaf-ans-3 3s linear infinite;
 }
 
+/* ANIMATIONS */
 @keyframes leaf-ans-1 {
   0%,
   100% {
@@ -1341,31 +1337,43 @@ body {
   }
 }
 
+/* NEW ROSE ANIMATIONS */
+@keyframes rose-bloom {
+  0% {
+    transform: scale(0) rotate(-90deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes stamen-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 2vmin #ffcc00,
+      inset 0 0 1vmin rgba(255, 255, 255, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 0 3vmin #ffcc00,
+      0 0 4vmin #ff9900,
+      inset 0 0 1vmin rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+  }
+}
+
 .not-loaded * {
   animation-play-state: paused !important;
 }
 
-/* Change flower petals to red */
-.flower__leaf {
-  background-color: #ff6b6b;
-  background-image: linear-gradient(to top, #c92a2a, #ff6b6b);
-  box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.3);
-}
-
-.flower__leaf--4 {
-  background-image: linear-gradient(to top, #c92a2a, #ff6b6b);
-}
-
-/* Adjust flower lights for red theme */
-.flower__light {
-  background-color: #ff9999;
-}
-
-.flower__light:nth-child(odd) {
-  background-color: #ffcccc;
-}
-
-/* Add Happy Valentine's Day text */
+/* Valentine's Day Text - Responsive */
 .valentine-text {
   position: fixed;
   top: 50px;
@@ -1383,19 +1391,27 @@ body {
 }
 
 .valentine-text h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   margin: 0;
   font-weight: bold;
-  letter-spacing: 3px;
+  letter-spacing: clamp(1px, 0.5vw, 3px);
   animation: text-float 6s ease-in-out infinite;
+  background: linear-gradient(45deg, #ff3366, #ff6699, #ff3366);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 100%;
+  animation: text-float 6s ease-in-out infinite, gradient-shift 3s ease-in-out infinite;
+  padding: 0 20px;
 }
 
 .valentine-text h2 {
-  font-size: 2rem;
+  font-size: clamp(1.2rem, 3vw, 2rem);
   margin: 10px 0 0 0;
   font-weight: 300;
   opacity: 0.9;
   animation: text-float 6s ease-in-out infinite reverse;
+  padding: 0 20px;
 }
 
 @keyframes text-glow {
@@ -1420,7 +1436,16 @@ body {
   }
 }
 
-/* Optional: Add some floating hearts */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Floating hearts - Responsive */
 .hearts {
   position: fixed;
   width: 100%;
@@ -1432,7 +1457,7 @@ body {
 .heart {
   position: absolute;
   color: #ff6b6b;
-  font-size: 20px;
+  font-size: clamp(12px, 2vmin, 20px);
   opacity: 0;
   animation: float-up 6s linear infinite;
 }
@@ -1465,7 +1490,253 @@ body {
   }
 }
 
-/* Adjust night background for romantic feel */
-.night {
-  background: linear-gradient(to bottom, #1a0033, #330033, #660033);
+/* Rose petal rain - Responsive */
+.rose-petals {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 300;
+}
+
+.rose-petal {
+  position: absolute;
+  width: clamp(2vmin, 4vmin, 6vmin);
+  height: clamp(2vmin, 4vmin, 6vmin);
+  background: linear-gradient(45deg, #ff3366, #ff6699);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0;
+  filter: blur(0.2vmin);
+  animation: petal-fall 10s linear infinite;
+  box-shadow: 0 0.5vmin 1vmin rgba(255, 51, 102, 0.3);
+}
+
+.rose-petal:nth-child(1) { left: 5%; animation-delay: 0s; }
+.rose-petal:nth-child(2) { left: 15%; animation-delay: 1s; }
+.rose-petal:nth-child(3) { left: 25%; animation-delay: 2s; }
+.rose-petal:nth-child(4) { left: 35%; animation-delay: 3s; }
+.rose-petal:nth-child(5) { left: 45%; animation-delay: 4s; }
+.rose-petal:nth-child(6) { left: 55%; animation-delay: 5s; }
+.rose-petal:nth-child(7) { left: 65%; animation-delay: 6s; }
+.rose-petal:nth-child(8) { left: 75%; animation-delay: 7s; }
+.rose-petal:nth-child(9) { left: 85%; animation-delay: 8s; }
+.rose-petal:nth-child(10) { left: 95%; animation-delay: 9s; }
+.rose-petal:nth-child(11) { left: 10%; animation-delay: 0.5s; }
+.rose-petal:nth-child(12) { left: 20%; animation-delay: 1.5s; }
+.rose-petal:nth-child(13) { left: 30%; animation-delay: 2.5s; }
+.rose-petal:nth-child(14) { left: 40%; animation-delay: 3.5s; }
+.rose-petal:nth-child(15) { left: 50%; animation-delay: 4.5s; }
+
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10vmin) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) scale(1);
+    opacity: 0;
+  }
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 1200px) {
+  .flowers {
+    transform: scale(0.8);
+  }
+  
+  .long-g {
+    left: -35vmin;
+  }
+  
+  .long-g--2,
+  .long-g--3 {
+    left: -30vmin;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 30px 0px;
+  }
+  
+  .flowers {
+    transform: scale(0.7);
+  }
+  
+  .flower--2 {
+    left: 40%;
+    transform: rotate(15deg);
+  }
+  
+  .flower--3 {
+    left: 60%;
+    transform: rotate(-10deg);
+  }
+  
+  .valentine-text {
+    top: 30px;
+  }
+  
+  .valentine-text h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  
+  .valentine-text h2 {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+  
+  .long-g {
+    left: -25vmin;
+  }
+  
+  .long-g--2,
+  .long-g--3 {
+    left: -20vmin;
+  }
+  
+  .long-g--4 {
+    left: 20vmin;
+  }
+  
+  .long-g--5 {
+    left: 35vmin;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px 0px;
+    align-items: center;
+  }
+  
+  .flowers {
+    transform: scale(0.6);
+  }
+  
+  .flower--1,
+  .flower--2,
+  .flower--3 {
+    position: relative;
+    bottom: 5vmin;
+  }
+  
+  .flower--2 {
+    left: 30%;
+    transform: rotate(10deg);
+  }
+  
+  .flower--3 {
+    left: 70%;
+    transform: rotate(-5deg);
+  }
+  
+  .valentine-text {
+    top: 20px;
+  }
+  
+  .valentine-text h1 {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    line-height: 1.3;
+  }
+  
+  .valentine-text h2 {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+  }
+  
+  .heart {
+    font-size: clamp(10px, 1.5vmin, 16px);
+  }
+  
+  .rose-petal {
+    width: clamp(1.5vmin, 3vmin, 4vmin);
+    height: clamp(1.5vmin, 3vmin, 4vmin);
+  }
+  
+  /* Reduce number of floating elements on mobile */
+  .heart:nth-child(n+6),
+  .rose-petal:nth-child(n+8) {
+    display: none;
+  }
+  
+  .long-g {
+    display: none; /* Hide background leaves on very small screens */
+  }
+  
+  .flower__g-long,
+  .flower__g-right,
+  .flower__g-front,
+  .flower__g-fr {
+    transform: scale(0.8);
+  }
+}
+
+/* Handle landscape orientation */
+@media (max-height: 600px) and (orientation: landscape) {
+  body {
+    padding: 10px 0px;
+  }
+  
+  .flowers {
+    transform: scale(0.7);
+  }
+  
+  .valentine-text {
+    top: 20px;
+  }
+  
+  .valentine-text h1 {
+    font-size: 2rem;
+  }
+  
+  .valentine-text h2 {
+    font-size: 1.2rem;
+  }
+  
+  .flower__line {
+    height: 40vmin;
+  }
+  
+  .flower--1 .flower__line {
+    height: 50vmin;
+  }
+  
+  .flower--2 .flower__line {
+    height: 45vmin;
+  }
+}
+
+/* Handle very large screens */
+@media (min-width: 1920px) {
+  .flowers {
+    transform: scale(1.1);
+  }
+  
+  .valentine-text h1 {
+    font-size: 4rem;
+  }
+  
+  .valentine-text h2 {
+    font-size: 2.5rem;
+  }
+  
+  .heart {
+    font-size: 24px;
+  }
+}
+
+/* Ensure animations are smooth on mobile */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
